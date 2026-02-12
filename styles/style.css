@@ -15,11 +15,6 @@ h1 {
   color: white
 }
 
-.hidden
-{
-    display: none;
-}
-
 .btn_wrapper {
   position: relative;
   display: flex;
@@ -64,4 +59,15 @@ h1 {
 .btn_item.grow {
   width: 180px;
   height: 180px;
+}
+
+.gif {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+    display: none;
 }

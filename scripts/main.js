@@ -1,4 +1,5 @@
 const yesItem = document.querySelector("#yesItem");
+const gif = document.querySelector("#gif_container");
 
 yesItem.addEventListener("mouseenter", () => {
   yesItem.classList.add("grow");
@@ -7,6 +8,10 @@ yesItem.addEventListener("mouseenter", () => {
 yesItem.addEventListener("mouseleave", () => {
   yesItem.classList.remove("grow");
 });
+
+yesItem.addEventListener("click", () => {
+  gif.classList.remove("hidden");
+})
 
 const noItem = document.querySelector("#noItem");
 const wrapper = document.querySelector(".btn_wrapper");
@@ -29,3 +34,4 @@ function moveNoButton() {
 }
 
 noItem.addEventListener("mouseenter", moveNoButton);
+
