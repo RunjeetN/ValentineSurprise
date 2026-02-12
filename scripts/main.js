@@ -1,5 +1,6 @@
 const yesItem = document.querySelector("#yesItem");
 const gif = document.querySelector("#gif_container");
+const screen1 = document.querySelector("#screen1");
 
 yesItem.addEventListener("mouseenter", () => {
   yesItem.classList.add("grow");
@@ -11,6 +12,7 @@ yesItem.addEventListener("mouseleave", () => {
 
 yesItem.addEventListener("click", () => {
   gif.classList.remove("hidden");
+  screen1.classList.add("hidden");
 })
 
 const noItem = document.querySelector("#noItem");
