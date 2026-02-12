@@ -8,9 +8,24 @@ yesItem.addEventListener("mouseleave", () => {
   yesItem.classList.remove("grow");
 });
 
+const noItem = document.querySelector("#noItem");
+const wrapper = document.querySelector(".btn_wrapper");
 
-const noItem = document.querySelector("#noBtn");
+function moveNoButton() {
+  const padding = 8;
 
-noItem.addEventListener("mouseenter", () => {
-    noItem.classList.add("move");
-});
+  const wRect = wrapper.getBoundingClientRect();
+  const nRect = noItem.getBoundingClientRect();
+
+  const maxLeft = wRect.width - nRect.width - padding;
+  const maxTop  = wRect.height - nRect.height - padding;
+
+  const left = Math.floor(Math.random() * (maxLeft - padding + 1)) + padding;
+  const top  = Math.floor(Math.random() * (maxTop  - padding + 1)) + padding;
+
+  noItem.style.left = `${left}px`;
+  noItem.style.top = `${top}px`;
+  noItem.style.transform = "none"; // stop centering after first move
+}
+
+noItem.addEventListener("mouseenter", moveNoButton);
