@@ -18,22 +18,24 @@ yesItem.addEventListener("click", () => {
 const noItem = document.querySelector("#noItem");
 const wrapper = document.querySelector(".btn_wrapper");
 
+let currentX = 0;
+let currentY = 0;
+
 function moveNoButton() {
   const padding = 8;
 
   const wRect = wrapper.getBoundingClientRect();
   const nRect = noItem.getBoundingClientRect();
 
-  const maxLeft = wRect.width - nRect.width - padding;
-  const maxTop  = wRect.height - nRect.height - padding;
+  // allowable translate range inside wrapper
+  const maxX = wRect.width - nRect.width - padding;
+  const maxY = wRect.height - nRect.height - padding;
 
-  const left = Math.floor(Math.random() * (maxLeft - padding + 1)) + padding;
-  const top  = Math.floor(Math.random() * (maxTop  - padding + 1)) + padding;
+  // pick a new translate (within wrapper)
+  currentX = Math.floor(Math.random() * (maxX - padding + 1)) + padding;
+  currentY = Math.floor(Math.random() * (maxY - padding + 1)) + padding;
 
-  noItem.style.left = `${left}px`;
-  noItem.style.top = `${top}px`;
-  noItem.style.transform = "none"; // stop centering after first move
+  noItem.style.transform = `translate(${currentX}px, ${currentY}px)`;
 }
 
 noItem.addEventListener("mouseenter", moveNoButton);
-

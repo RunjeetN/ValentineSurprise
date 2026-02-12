@@ -30,6 +30,7 @@ html {
 
 .text_container{
   display: flex;
+  align-items: center; 
   text-align: center;
   border: 2px solid #ffffff;
   border-radius: 12px;
@@ -39,6 +40,7 @@ html {
 .uwu {
   width: 96px;
   height: 96px;
+  display:block;
 }
 
 h1 {
@@ -66,13 +68,6 @@ h1 {
   margin: 0 auto;         /* optional */
 }
 
-#noItem {
-  position: absolute;     /* NEW: allows left/top movement inside wrapper */
-  left: 60%;              /* starting position */
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: left 120ms ease, top 120ms ease; /* smooth jump */
-}
 
 
 /* Each item has a real layout size */
