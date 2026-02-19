@@ -1,107 +1,150 @@
-html {
-  background-color:rgba(237, 156, 198, 0.346);
+/* ===== Base / page centering ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: rgba(237, 156, 198, 0.346);
+  display: flex;
+  align-items: center;
   justify-content: center;
-}
-.screen_container{
-  width: 75vw;              
-  min-height: 90vh;        
-  margin: 0 auto;           
-  display: flex; 
-  align-items: center;      
-  justify-content: center;  
-  gap: 14px;   
-}
-.screen1{
-  border: 2px solid #ffffff;
-  border-radius: 12px;
-  background-color:rgb(255, 255, 255);
-
-
-  width: 40vw;              
-  min-height: 75vh;        
-  margin: 0 auto;           
-  display: flex;
-  flex-direction: column;   
-  align-items: center;      
-  justify-content:flex-start;  
-  gap: 24px;    
-  padding-top: 10px;            
-}
-
-.text_container{
-  display: flex;
-  align-items: center; 
-  text-align: center;
-  border: 2px solid #ffffff;
-  border-radius: 12px;
   padding: 16px;
 }
 
+/* ===== Main container ===== */
+.screen_container {
+  width: min(900px, 100%);
+  min-height: calc(100vh - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Card ===== */
+.screen1 {
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background-color: rgb(255, 255, 255);
+
+  width: min(520px, 100%);
+  min-height: min(75vh, 720px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 20px;
+  padding: 16px;
+}
+
+/* ===== Header row ===== */
+.text_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  text-align: center;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* On small screens: stack text + gif vertically so it doesn't squeeze */
+@media (max-width: 520px) {
+  .text_container {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 10px;
+  }
+}
+
 .uwu {
-  width: 96px;
-  height: 96px;
-  display:block;
+  width: clamp(64px, 18vw, 96px);
+  height: clamp(64px, 18vw, 96px);
+  display: block;
 }
 
 h1 {
   margin: 0;
-  text-shadow: 3px 3px 1px rgba(151, 149, 149, 0.333);
-  padding: 10px 10px 0 0;
+  padding: 0;
 
   font-family: "Great Vibes", cursive;
   font-weight: 800;
   font-style: normal;
-  text-align:center;
-  color: rgb(0, 0, 0)
+
+  font-size: clamp(34px, 7vw, 56px);
+  line-height: 1.05;
+
+  text-shadow: 3px 3px 1px rgba(151, 149, 149, 0.333);
+  color: rgb(0, 0, 0);
 }
 
+/* ===== Result gif ===== */
+.gif {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gif img {
+  width: min(420px, 100%);
+  height: auto;
+  display: block;
+}
+
+/* ===== Buttons area ===== */
 .btn_wrapper {
   position: relative;
+
+  width: min(700px, 100%);
+  height: clamp(220px, 38vh, 320px);
+
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: clamp(18px, 8vw, 60px);
 
-  height: 260px;          /* NEW: space to move around */
-  width: min(700px, 40vw);/* optional but nice */
-  margin: 0 auto;         /* optional */
+  margin: 0 auto;
 }
 
-
-
-/* Each item has a real layout size */
+/* Each button wrapper has a real layout size */
 .btn_item {
-  width: 96px;
-  height: 96px;
+  width: clamp(84px, 18vw, 110px);
+  height: clamp(84px, 18vw, 110px);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  transition: width 150ms ease, height 150ms ease;
+  transition: width 150ms ease, height 150ms ease, transform 120ms ease;
+  touch-action: manipulation;
 }
 
-/* Make the image fill its wrapper */
 .btn_item img {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-/* When wrapper grows, the layout shifts */
+/* Grow stays reasonable on phones */
 .btn_item.grow {
-  width: 180px;
-  height: 180px;
+  width: clamp(130px, 26vw, 180px);
+  height: clamp(130px, 26vw, 180px);
 }
 
-.gif {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Utility */
 .hidden {
-    display:none;
+  display: none;
 }

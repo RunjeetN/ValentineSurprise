@@ -1,41 +1,58 @@
 const yesItem = document.querySelector("#yesItem");
-const gif = document.querySelector("#gif_container");
-const screen1 = document.querySelector("#screen1");
-
-yesItem.addEventListener("mouseenter", () => {
-  yesItem.classList.add("grow");
-});
-
-yesItem.addEventListener("mouseleave", () => {
-  yesItem.classList.remove("grow");
-});
-
-yesItem.addEventListener("click", () => {
-  gif.classList.remove("hidden");
-  screen1.classList.add("hidden");
-})
-
 const noItem = document.querySelector("#noItem");
 const wrapper = document.querySelector(".btn_wrapper");
 
-let currentX = 0;
-let currentY = 0;
+const gif = document.querySelector("#gif_container");
+const screen1 = document.querySelector(".screen1"); // was #screen1 (doesn't exist)
 
+// --- YES button: hover on mouse, toggle on touch ---
+yesItem.addEventListener("pointerenter", (e) => {
+  if (e.pointerType === "mouse") yesItem.classList.add("grow");
+});
+
+yesItem.addEventListener("pointerleave", (e) => {
+  if (e.pointerType === "mouse") yesItem.classList.remove("grow");
+});
+
+// On touch, there is no hover, so allow tap to grow
+yesItem.addEventListener("pointerdown", (e) => {
+  if (e.pointerType !== "mouse") yesItem.classList.add("grow");
+});
+
+// Click to reveal gif screen
+const textContainer = document.querySelector(".text_container");
+const btnWrapper = document.querySelector(".btn_wrapper");
+
+yesItem.addEventListener("click", () => {
+  gif.classList.remove("hidden");      // show gif
+  btnWrapper.classList.add("hidden");    // hide buttons
+});
+
+// --- NO button: move within wrapper ---
 function moveNoButton() {
-  const padding = 8;
+  const padding = 10;
 
   const wRect = wrapper.getBoundingClientRect();
   const nRect = noItem.getBoundingClientRect();
 
-  // allowable translate range inside wrapper
   const maxX = wRect.width - nRect.width - padding;
   const maxY = wRect.height - nRect.height - padding;
 
-  // pick a new translate (within wrapper)
-  currentX = Math.floor(Math.random() * (maxX - padding + 1)) + padding;
-  currentY = Math.floor(Math.random() * (maxY - padding + 1)) + padding;
+  // If the wrapper is too small, don't try to move (prevents NaN / weird jumps)
+  if (maxX <= padding || maxY <= padding) return;
 
-  noItem.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const x = Math.floor(Math.random() * (maxX - padding + 1)) + padding;
+  const y = Math.floor(Math.random() * (maxY - padding + 1)) + padding;
+
+  noItem.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-noItem.addEventListener("mouseenter", moveNoButton);
+// Mouse hover
+noItem.addEventListener("pointerenter", (e) => {
+  if (e.pointerType === "mouse") moveNoButton();
+});
+
+// Touch tap
+noItem.addEventListener("pointerdown", (e) => {
+  if (e.pointerType !== "mouse") moveNoButton();
+});
